@@ -72,11 +72,18 @@ public class Student implements Comparable {
 
 	@Override
 	public int hashCode() {
+  return this.getId();
 		return super.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+  if (!(o instanceof Student)) {
+            return false;
+        }
+		Student s = (Student)o;
+		return this.getId() == s.getId() && this.getFullName() == s.getFullName() && this.getAvgMark() == s.getAvgMark() && 
+			   this.getBirthDate().compareTo(s.getBirthDate()) == 0;
 		return super.equals(obj);
 	}
 	
@@ -86,6 +93,13 @@ public class Student implements Comparable {
 	 */
 	@Override
 	public int compareTo(Object o) {
+if (!(o instanceof Student)) {
+            return -1;
+        }
+		Student s = (Student)o;
+          if(this.getId() < s.getId()) return -1;
+		  else if(this.getId() > s.getId()) return 1;
+		  else return 0;
 		Student other = (Student) o;
 		return (this.fullName.compareTo(other.fullName));
 	}
